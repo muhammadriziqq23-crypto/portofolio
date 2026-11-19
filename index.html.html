@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title> — Portofolio</title>
+<meta name="description" content="Portofolio web developer pemula: proyek, keahlian, dan kontak.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #EEF2F7;
+    --ink: #14213D;
+    --muted: #55637E;
+    --cobalt: #2B4EFF;
+    --sun: #FFC93C;
+    --line: #C9D3E3;
+    --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+    --body: "Hanken Grotesk", "Segoe UI", system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #0F1730; --ink: #EEF2F7; --muted: #9AA8C4; --line: #2A3558;
+      --cobalt: #7C93FF;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #0F1730; --ink: #EEF2F7; --muted: #9AA8C4; --line: #2A3558;
+    --cobalt: #7C93FF;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font: 400 1.0625rem/1.65 var(--body);
+  }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--cobalt); outline-offset: 3px; border-radius: 4px; }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* Header */
+  header { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 0; }
+  header nav { display: flex; gap: 1.5rem; align-items: center; font-weight: 500; }
+  header nav a { text-decoration: none; color: var(--muted); }
+  header nav a:hover { color: var(--ink); }
+  .logo { font: 800 1.25rem var(--display); text-decoration: none; }
+  #theme {
+    border: 1px solid var(--line); background: transparent; color: var(--ink);
+    border-radius: 999px; padding: .35rem .8rem; font: 500 .9rem var(--body); cursor: pointer;
+  }
+
+  /* Hero */
+  .hero { padding: 5rem 0 4rem; }
+  .hero h1 {
+    font: 800 clamp(3rem, 11vw, 7.5rem)/0.95 var(--display);
+    letter-spacing: -0.03em; margin: 0 0 1.5rem;
+  }
+  .hero h1 span {
+    display: inline-block; background: var(--sun); color: #14213D;
+    padding: 0 .12em; transform: rotate(-1.5deg);
+  }
+  .hero p { max-width: 34rem; font-size: 1.25rem; color: var(--muted); margin: 0 0 2rem; }
+  .btn {
+    display: inline-block; padding: .85rem 1.4rem; border-radius: 10px; font-weight: 600;
+    text-decoration: none; transition: transform .15s;
+  }
+  .btn.primary { background: var(--cobalt); color: #fff; }
+  .btn.ghost { border: 1.5px solid var(--ink); margin-left: .5rem; }
+  .btn:hover { transform: translateY(-2px); }
+
+  /* Sections */
+  section { padding: 4rem 0; border-top: 1px solid var(--line); }
+  h2 { font: 800 2rem var(--display); letter-spacing: -0.01em; margin: 0 0 2rem; }
+  .about { display: grid; gap: 2rem; grid-template-columns: 1fr; }
+  @media (min-width: 760px) { .about { grid-template-columns: 2fr 1fr; } }
+  .about p { margin: 0 0 1rem; max-width: 60ch; }
+  .facts { margin: 0; padding: 0; list-style: none; }
+  .facts li { padding: .7rem 0; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; gap: 1rem; }
+  .facts li span:first-child { color: var(--muted); }
+
+  /* Projects */
+  .filters { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.5rem; }
+  .filters button {
+    border: 1px solid var(--line); background: transparent; color: var(--ink);
+    padding: .4rem 1rem; border-radius: 999px; font: 500 .95rem var(--body); cursor: pointer;
+  }
+  .filters button[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .project {
+    display: grid; grid-template-columns: 1fr; gap: .25rem 2rem;
+    padding: 1.5rem 0; border-bottom: 1px solid var(--line);
+  }
+  @media (min-width: 760px) { .project { grid-template-columns: 7rem 1fr auto; align-items: baseline; } }
+  .project[hidden] { display: none; }
+  .project time { color: var(--muted); }
+  .project h3 { margin: 0; font: 800 1.35rem var(--display); }
+  .project p { margin: .25rem 0 0; color: var(--muted); max-width: 55ch; }
+  .project a { font-weight: 600; color: var(--cobalt); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+
+  /* Skills */
+  .skills { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .skill-group { border-left: 4px solid var(--cobalt); padding-left: 1rem; }
+  .skill-group h3 { margin: 0 0 .4rem; font: 800 1.1rem var(--display); }
+  .skill-group p { margin: 0; color: var(--muted); }
+
+  /* Contact */
+  form { display: grid; gap: 1rem; max-width: 34rem; }
+  label { display: grid; gap: .35rem; font-weight: 600; }
+  input, textarea {
+    font: inherit; padding: .75rem .9rem; border-radius: 8px;
+    border: 1.5px solid var(--line); background: transparent; color: var(--ink);
+  }
+  textarea { min-height: 8rem; resize: vertical; }
+  form .btn { justify-self: start; border: 0; cursor: pointer; font-size: 1rem; }
+  .note { color: var(--muted); font-size: .95rem; }
+
+  footer { padding: 2rem 0 3rem; color: var(--muted); border-top: 1px solid var(--line); }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .btn { transition: none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <a class="logo" href="#top">NK</a>
+    <nav aria-label="Navigasi utama">
+      <a href="#tentang">Tentang</a>
+      <a href="#proyek">Proyek</a>
+      <a href="#keahlian">Keahlian</a>
+      <a href="#kontak">Kontak</a>
+      <button id="theme" type="button" aria-label="Ganti tema">Tema</button>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- GANTI: nama dan kalimat pembuka -->
+    <div class="hero">
+      <h1>Halo, saya <span>Muhammad Rizik</span></h1>
+      <p>Web developer pemula yang suka membangun situs sederhana, rapi, dan cepat dibuka.</p>
+      <a class="btn primary" href="#proyek">Lihat proyek</a>
+      <a class="btn ghost" href="#kontak">Hubungi saya</a>
+    </div>
+
+    <section id="tentang">
+      <h2>Tentang saya</h2>
+      <div class="about">
+        <div>
+          <!-- GANTI: ceritakan dirimu -->
+          <p>Saya sedang belajar membuat website dari nol, mulai dari HTML dan CSS sampai PHP di server buatan sendiri.</p>
+          <p>Saya suka memecah masalah besar menjadi langkah kecil, lalu mengerjakannya satu per satu sampai jalan.</p>
+        </div>
+        <ul class="facts">
+          <li><span>Lokasi</span><span>Padang, Indonesia</span></li>
+          <li><span>Fokus</span><span>Web development</span></li>
+          <li><span>Status</span><span>Terbuka untuk proyek</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="proyek">
+      <h2>Proyek</h2>
+      <div class="filters" role="group" aria-label="Filter proyek">
+        <button type="button" data-filter="semua" aria-pressed="true">Semua</button>
+        <button type="button" data-filter="html" aria-pressed="false">HTML/CSS</button>
+        <button type="button" data-filter="php" aria-pressed="false">PHP</button>
+      </div>
+
+      <!-- GANTI: salin blok .project untuk menambah proyek -->
+      <article class="project" data-tag="html">
+        <time datetime="2026">2026</time>
+        <div>
+          <h3>Halaman Profil Pribadi</h3>
+          <p>Halaman satu layar dengan tata letak responsif, dibuat hanya dengan HTML dan CSS.</p>
+        </div>
+        <a href="#">Lihat</a>
+      </article>
+
+      <article class="project" data-tag="php">
+        <time datetime="2026">2026</time>
+        <div>
+          <h3>Buku Tamu Sederhana</h3>
+          <p>Formulir yang menyimpan pesan pengunjung dengan PHP dan menampilkannya di halaman.</p>
+        </div>
+        <a href="#">Lihat</a>
+      </article>
+
+      <article class="project" data-tag="php">
+        <time datetime="2026">2026</time>
+        <div>
+          <h3>Daftar Tugas</h3>
+          <p>Aplikasi untuk menambah, menandai selesai, dan menghapus tugas harian.</p>
+        </div>
+        <a href="#">Lihat</a>
+      </article>
+    </section>
+
+    <section id="keahlian">
+      <h2>Keahlian</h2>
+      <div class="skills">
+        <div class="skill-group"><h3>Tampilan</h3><p>HTML, CSS, tata letak responsif</p></div>
+        <div class="skill-group"><h3>Logika</h3><p>JavaScript dasar, PHP dasar</p></div>
+        <div class="skill-group"><h3>Alat</h3><p>Git, VS Code, server lokal</p></div>
+      </div>
+    </section>
+
+    <section id="kontak">
+      <h2>Kontak</h2>
+      <form id="kontak-form">
+        <label>Nama <input name="nama" required autocomplete="name"></label>
+        <label>Pesan <textarea name="pesan" required></textarea></label>
+        <button class="btn primary" type="submit">Kirim lewat email</button>
+        <p class="note">Tombol ini membuka aplikasi email Anda dengan pesan yang sudah terisi.</p>
+      </form>
+    </section>
+  </main>
+
+  <footer>© <span id="tahun"></span> Muhammad Rizik</footer>
+</div>
+
+<script>
+  const EMAIL = "muhammadriziqq23@gmail.com"; // GANTI dengan email kamu
+
+  // Filter proyek
+  const tombol = document.querySelectorAll(".filters button");
+  const proyek = document.querySelectorAll(".project");
+  tombol.forEach(b => b.addEventListener("click", () => {
+    tombol.forEach(x => x.setAttribute("aria-pressed", x === b));
+    proyek.forEach(p => {
+      p.hidden = b.dataset.filter !== "semua" && p.dataset.tag !== b.dataset.filter;
+    });
+  }));
+
+  // Tema terang/gelap
+  const root = document.documentElement;
+  document.getElementById("theme").addEventListener("click", () => {
+    const gelap = getComputedStyle(root).getPropertyValue("--paper").trim() === "#0F1730";
+    root.dataset.theme = gelap ? "light" : "dark";
+  });
+
+  // Form kontak -> mailto
+  document.getElementById("kontak-form").addEventListener("submit", e => {
+    e.preventDefault();
+    const f = new FormData(e.target);
+    const subjek = encodeURIComponent("Pesan dari " + f.get("nama"));
+    const isi = encodeURIComponent(f.get("pesan"));
+    location.href = `mailto:${EMAIL}?subject=${subjek}&body=${isi}`;
+  });
+
+  document.getElementById("tahun").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
